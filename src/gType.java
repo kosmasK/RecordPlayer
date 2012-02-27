@@ -1,0 +1,4 @@
+
+public enum gType {
+	CLASSICAL,POP,ROCK,JAZZ,DANCE,OTHERS
+}
