@@ -1,14 +1,15 @@
+package es.uc3m.recordplayer;
 
 public class Performer {
 	
 	private String name;
-	private pType type;
+	private PerformerType type;
 	
 	//default constructor
 	public Performer(){};
 	
 	//parameterized constructor
-	public Performer(String n,pType t){
+	public Performer(String n,PerformerType t){
 		this.name=n;
 		this.type=t;
 		}
@@ -18,7 +19,7 @@ public class Performer {
 		this.name=n;
 	}
 	
-	public void setType(pType t){
+	public void setType(PerformerType t){
 		this.type=t;
 	}
 	
@@ -27,7 +28,7 @@ public class Performer {
 		return this.name;
 	}
 	
-	public pType getType(){
+	public PerformerType getType(){
 		return this.type;
 	}
 	
