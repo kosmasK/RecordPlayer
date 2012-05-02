@@ -65,12 +65,12 @@ public class Record {
 	}
 	
 	//add track with the same performer as the record
-	public void addTrack(int side, String title, GenreType genre, int year, float duration, boolean composed, boolean recorded, boolean studio){
+	public void addTrack(int side, String title, Genre genre, int year, float duration, boolean composed, boolean recorded, boolean studio){
 		this.sides[side].getSide().addLast(new Song(title, genre, this.recordPerformer, year, duration, composed, recorded, studio));
 	}
 	
 	//add track with a different performer than the record
-	public void addTrack(int side, String title, GenreType genre,Performer trackPerf, int year, float duration, boolean composed, boolean recorded, boolean studio){
+	public void addTrack(int side, String title, Genre genre,Performer trackPerf, int year, float duration, boolean composed, boolean recorded, boolean studio){
 		this.sides[side].getSide().addLast(new Song(title, genre, trackPerf, year, duration, composed, recorded, studio));
 	}
 	

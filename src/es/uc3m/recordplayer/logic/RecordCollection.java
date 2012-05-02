@@ -56,7 +56,7 @@ public class RecordCollection extends SList<Record> {
 	}
 	
 	//get tracks by the specific genre
-	public AList<Song> getTracksByGenre(GenreType g){
+	public AList<Song> getTracksByGenre(Genre g){
 		AList<Song> tracksByGenre = new AList<Song>();
 		int i=0;
 		//Side[] side=new Side[2];

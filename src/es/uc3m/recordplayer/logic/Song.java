@@ -2,7 +2,7 @@ package es.uc3m.recordplayer.logic;
 
 public class Song {
 	private String title;
-	private GenreType genre;
+	private Genre genre;
 	private Performer artist;
 	private int year;
 	private float duration;		
@@ -14,7 +14,7 @@ public class Song {
 	public Song(){}
 	
 	//parameterized constructor
-	public Song(String t, GenreType g, Performer a, int y, float d, boolean c, boolean r, boolean s){
+	public Song(String t, Genre g, Performer a, int y, float d, boolean c, boolean r, boolean s){
 		this.title=t;
 		this.genre=g;
 		this.artist=a;
@@ -30,7 +30,7 @@ public class Song {
 		this.title=t;
 	}
 	
-	public void setGenre(GenreType g){
+	public void setGenre(Genre g){
 		this.genre=g;
 	}
 	
@@ -63,7 +63,7 @@ public class Song {
 		return this.title;
 	}
 	
-	public GenreType getGenre(){
+	public Genre getGenre(){
 		return this.genre;
 	}
 	
