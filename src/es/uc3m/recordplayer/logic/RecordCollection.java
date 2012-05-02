@@ -1,4 +1,4 @@
-package es.uc3m.recordplayer;
+package es.uc3m.recordplayer.logic;
 
 import es.uc3m.eda.list.singlelink.SListIterator;
 import es.uc3m.eda.list.singlelink.SList;

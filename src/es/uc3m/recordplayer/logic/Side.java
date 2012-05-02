@@ -1,14 +1,13 @@
-package es.uc3m.recordplayer;
+package es.uc3m.recordplayer.logic;
 
 import es.uc3m.eda.list.arraylist.AList;
 import es.uc3m.eda.list.arraylist.AListIterator;
 
 public class Side {
+	
 	private AList<Song> songs;
 	private float totalDuration;
 	float[] tracksDurationFromZeroSec;
-	
-	
 	
 	//default constructor
 	public Side(){}
@@ -27,8 +26,6 @@ public class Side {
 	public void setSide(AList<Song> s){
 		this.songs=s;
 	}
-	
-	
 	
 	//get total side duration
 	public float getTotalSideDuration(){
@@ -51,8 +48,6 @@ public class Side {
 		return this.totalDuration/60; //result in minutes
 	}
 
-	
-	
 	//get track with the specific title
 	public Song getSongByTitle(String t){
 		for (AListIterator<Song> iterator = this.songs.createIterator(); iterator.isValid(); iterator.moveNext()){ 
@@ -61,8 +56,6 @@ public class Side {
 		}
 		return null;
 	}
-
-	
 	
 	//method that returns the starting stylus position (0 to 100) for a given track contained in the side
 	public float getStylusPositionByTrack(String t){
@@ -86,7 +79,7 @@ public class Side {
 	}
 	
 	//method that returns the track that is playing when the stylus is placed at a given position (0 to 100) on that side
-	public Song getTrackByStylusPosition(float sp){
+	public Song getTrackByStylusPosition(float stylusPos){
 		
 		//check if total duration has been calculated before
 		if (this.tracksDurationFromZeroSec.length==0){
@@ -97,12 +90,12 @@ public class Side {
 		for (AListIterator<Song> iterator = this.songs.createIterator(); iterator.isValid(); iterator.moveNext()){ 
 			
 			if (i==0){
-				if(sp>=0.00f && sp<(this.tracksDurationFromZeroSec[i]/this.totalDuration)*100){
+				if(stylusPos>=0.00f && stylusPos<(this.tracksDurationFromZeroSec[i]/this.totalDuration)*100){
 					return iterator.getCurrentElem();
 				}
 			}
 			else{
-				if(sp>=(this.tracksDurationFromZeroSec[i-1]/this.totalDuration)*100 && sp<(this.tracksDurationFromZeroSec[i]/this.totalDuration)*100){
+				if(stylusPos>=(this.tracksDurationFromZeroSec[i-1]/this.totalDuration)*100 && stylusPos<(this.tracksDurationFromZeroSec[i]/this.totalDuration)*100){
 					return iterator.getCurrentElem();
 				}
 			}		
@@ -112,4 +105,4 @@ public class Side {
 		
 		return null; //error case
 	}
-}
+}//end of class

@@ -1,4 +1,4 @@
-package es.uc3m.recordplayer;
+package es.uc3m.recordplayer.logic;
 
 public class Record {
 	
@@ -6,13 +6,13 @@ public class Record {
 	private Performer recordPerformer;
 	private String title;
 	private int editionYear;
-	private SpeedType recordSpeed;
+	private Rpm recordSpeed;
 	
 	//default constructor
 	public Record(){}
 	
 	//parameterized constructor
-	public Record(Performer p, String t, int e, SpeedType r){
+	public Record(Performer p, String t, int e, Rpm r){
 		this.sides=new Side[2];
 		this.sides[0]=new Side();
 		this.sides[1]=new Side();
@@ -39,7 +39,7 @@ public class Record {
 		this.editionYear=e;
 	}
 		
-	public void setRecordSpeed(SpeedType r){
+	public void setRpm(Rpm r){
 		this.recordSpeed=r;
 	}	
 	
@@ -60,7 +60,7 @@ public class Record {
 		return this.editionYear;
 	}
 	
-	public SpeedType getRecordSpeed(){
+	public Rpm getRpm(){
 		return this.recordSpeed;
 	}
 	

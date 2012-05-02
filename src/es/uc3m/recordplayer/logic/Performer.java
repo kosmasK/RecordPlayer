@@ -1,4 +1,4 @@
-package es.uc3m.recordplayer;
+package es.uc3m.recordplayer.logic;
 
 public class Performer {
 	

@@ -1,6 +1,6 @@
-package es.uc3m.recordplayer;
+package es.uc3m.recordplayer.logic;
 
-public enum SpeedType {
+public enum Rpm {
 	// Enumeration type for the record speed
 	SPEED33,SPEED48,SPEED72;
 }
