@@ -1,6 +1,6 @@
 package es.uc3m.eda.list.singlelink;
 
-class SNode<E> {
+public class SNode<E> {
 
 	SNode<E> nextNode = null;
 

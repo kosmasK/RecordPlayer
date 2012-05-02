@@ -7,7 +7,7 @@ import es.uc3m.eda.list.IListIterator;
  * A double-linked list class with sentinel nodes 
  */
 
-public class DList<E> implements IList<E> {
+public class DList<E> implements IList<E>, IDList<E> {
 
 	DNode<E> header;
 	DNode<E> trailer;
@@ -51,7 +51,7 @@ public class DList<E> implements IList<E> {
 			}
 			++i;
 		}
-		System.err.println("DList: Insertion out of bounds");
+		System.out.println("DList: Insertion out of bounds");
 	}
 
 	@Override
@@ -84,7 +84,7 @@ public class DList<E> implements IList<E> {
 	@Override
 	public void removeFirst() {
 		if (isEmpty()) {
-			System.err.println("DList: List is empty");
+			System.out.println("DList: List is empty");
 			return;
 		}
 		this.header.nextNode = this.header.nextNode.nextNode; 
@@ -94,7 +94,7 @@ public class DList<E> implements IList<E> {
 	@Override
 	public void removeLast() {
 		if (isEmpty()) {
-			System.err.println("DList: List is empty");
+			System.out.println("DList: List is empty");
 			return;
 		}
 		this.trailer.previousNode = this.trailer.previousNode.previousNode; 
@@ -122,7 +122,7 @@ public class DList<E> implements IList<E> {
 			}
 			++i;
 		}
-		System.err.println("DList: Deletion out of bounds");
+		System.out.println("DList: Deletion out of bounds");
 	}
 
 	@Override
@@ -137,7 +137,7 @@ public class DList<E> implements IList<E> {
 	@Override
 	public E getFirst() {
 		if (isEmpty()) {
-			System.err.println("DList: List is empty");
+			System.out.println("DList: List is empty");
 			return null;
 		}
 		return this.header.nextNode.getElement();
@@ -146,7 +146,7 @@ public class DList<E> implements IList<E> {
 	@Override
 	public E getLast() {
 		if (isEmpty()) {
-			System.err.println("DList: List is empty");
+			System.out.println("DList: List is empty");
 			return null;
 		}
 		return this.trailer.previousNode.getElement();
@@ -161,7 +161,7 @@ public class DList<E> implements IList<E> {
 			}
 			++i;
 		}
-		System.err.println("DList: Get out of bounds");
+		System.out.println("DList: Get out of bounds");
 		return null;
 	}
 
@@ -170,6 +170,7 @@ public class DList<E> implements IList<E> {
 		return new DListIterator<E>(this);
 	}
 
+	@Override
 	public DListIterator<E> createIterator(boolean reverse) {
 		return new DListIterator<E>(this, reverse);
 	}
@@ -188,20 +189,24 @@ public class DList<E> implements IList<E> {
 		return result == null ? "empty" : result;
 	}
 	
-	public DNode<E> getHeader() {
-		return this.header;
-	}
-
-	public DNode<E> getTrailer() {
-		return this.trailer;
-	}
-
+	@Override
 	public DNode<E> getFirstNode() {
 		return this.header.nextNode;
 	}
 
+	@Override
 	public DNode<E> getLastNode() {
 		return this.trailer.previousNode;
+	}
+
+	@Override
+	public DNode<E> getHeader() {
+		return this.header;
+	}
+
+	@Override
+	public DNode<E> getTrailer() {
+		return this.trailer;
 	}
 
 	public static void main(String[] args) {

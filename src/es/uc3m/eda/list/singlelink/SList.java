@@ -3,7 +3,7 @@ package es.uc3m.eda.list.singlelink;
 import es.uc3m.eda.list.IList;
 import es.uc3m.eda.list.IListIterator;
 
-public class SList<E> implements IList<E> {
+public class SList<E> implements IList<E>, ISList<E>  {
 
 	SNode<E> firstNode = null;
 
@@ -44,7 +44,7 @@ public class SList<E> implements IList<E> {
 				}
 				++i;
 			}
-			System.err.println("SList: Insertion out of bounds");
+			System.out.println("SList: Insertion out of bounds");
 		}
 	}
 
@@ -117,7 +117,7 @@ public class SList<E> implements IList<E> {
 			++i;
 			previousNode = nodeIt;
 		}
-		System.err.println("SList: Deletion out of bounds");
+		System.out.println("SList: Deletion out of bounds");
 	}
 
 	@Override
@@ -144,7 +144,7 @@ public class SList<E> implements IList<E> {
 	@Override
 	public E getFirst() {
 		if (this.firstNode == null) {
-			System.err.println("SList: List is empty");
+			System.out.println("SList: List is empty");
 			return null;
 		}
 		return this.firstNode.getElement();
@@ -157,7 +157,7 @@ public class SList<E> implements IList<E> {
 			lastNode = node;
 		}
 		if (lastNode == null) {
-			System.err.println("SList: List is empty");
+			System.out.println("SList: List is empty");
 			return null;
 		}
 		return lastNode.getElement();
@@ -172,7 +172,7 @@ public class SList<E> implements IList<E> {
 			}
 			++i;
 		}
-		System.err.println("SList: Get out of bounds");
+		System.out.println("SList: Get out of bounds");
 		return null;
 	}
 
@@ -195,6 +195,7 @@ public class SList<E> implements IList<E> {
 		return result == null?"empty":result;
 	}
 	
+	@Override
 	public SNode<E> getFirstNode() {
 		return this.firstNode;
 	}

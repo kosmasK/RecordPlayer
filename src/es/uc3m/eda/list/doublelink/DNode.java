@@ -1,6 +1,6 @@
 package es.uc3m.eda.list.doublelink;
 
-class DNode<E> {
+public class DNode<E> {
 
 	DNode<E> previousNode = null;
 	DNode<E> nextNode = null;

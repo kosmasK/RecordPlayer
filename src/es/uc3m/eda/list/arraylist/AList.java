@@ -21,7 +21,7 @@ public class AList<E> implements IList<E> {
 	@Override
 	public void insertAt(int index, E elem) {
 		if (index < 0 || index > this.array.length) {
-			System.err.println("AList: Insertion out of bounds");
+			System.out.println("AList: Insertion out of bounds");
 			return;
 		}
 		@SuppressWarnings("unchecked")
@@ -63,14 +63,14 @@ public class AList<E> implements IList<E> {
 				return i;
 			}
 		}
-		System.err.println("AList: Not found");
+		System.out.println("AList: Not found");
 		return -1;
 	}
 
 	@Override
 	public E getFirst() {
 		if (this.array.length == 0) {
-			System.err.println("AList: List is empty");
+			System.out.println("AList: List is empty");
 			return null;
 		}
 		return (E) this.array[0];
@@ -79,7 +79,7 @@ public class AList<E> implements IList<E> {
 	@Override
 	public E getLast() {
 		if (this.array.length == 0) {
-			System.err.println("AList: List is empty");
+			System.out.println("AList: List is empty");
 			return null;
 		}
 		return (E) this.array[this.array.length - 1];
@@ -88,10 +88,10 @@ public class AList<E> implements IList<E> {
 	@Override
 	public E getAt(int index) {
 		if (index < 0 || index >= this.array.length) {
-			System.err.println("AList: Get out of bounds");
+			System.out.println("AList: Get out of bounds");
 			return null;
 		}
-		return null;
+		return this.array[index];
 	}
 
 	@Override
@@ -107,7 +107,7 @@ public class AList<E> implements IList<E> {
 	@Override
 	public void removeAt(int index) {
 		if (index < 0 || index > this.array.length) {
-			System.err.println("AList: Deletion out of bounds");
+			System.out.println("AList: Deletion out of bounds");
 			return;
 		}
 		@SuppressWarnings("unchecked")

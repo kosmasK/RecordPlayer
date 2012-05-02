@@ -1,30 +1,36 @@
 package es.uc3m.eda.list.doublelink;
 
-import es.uc3m.eda.list.IListIterator;
-
-public class DListIterator<E> implements IListIterator<E> {
-	DList<E> list;
+public class DListIterator<E> implements IDListIterator<E> {
+	IDList<E> list;
 	boolean reverse = false;
 
 	DNode<E> currentNode;
 
-	public DListIterator(DList<E> list)	{
+	public DListIterator(IDList<E> list) {
 		this(list, false);
 	}
 
-	public DListIterator(DList<E> list, boolean reverse) {
+	public DListIterator(IDList<E> list, boolean reverse) {
 		this.list = list;
 		this.reverse = false;
 		if (reverse) {
-			this.currentNode = this.list.trailer.previousNode;
+			this.currentNode = this.list.getTrailer().previousNode;
 		} else {
-			this.currentNode = this.list.header.nextNode;
+			this.currentNode = this.list.getHeader().nextNode;
 		}
 	}
 
 	@Override
 	public boolean isValid() {
-		return (this.currentNode != this.list.header) && (this.currentNode != this.list.trailer);
+		return (this.currentNode != this.list.getHeader())
+				&& (this.currentNode != this.list.getTrailer())
+				&& (this.currentNode != null);
+	}
+
+
+	@Override
+	public DNode<E> getCurrentNode() {
+		return this.currentNode;
 	}
 
 	@Override
@@ -46,6 +52,7 @@ public class DListIterator<E> implements IListIterator<E> {
 		}
 	}
 
+	@Override
 	public void movePrevious() {
 		if (isValid()) {
 			if (this.reverse) {

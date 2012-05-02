@@ -1,21 +1,25 @@
 package es.uc3m.eda.list.singlelink;
 
-import es.uc3m.eda.list.IListIterator;
 
-public class SListIterator<E> implements IListIterator<E> {
+public class SListIterator<E> implements ISListIterator<E> {
 
-	SList<E> list;
+	ISList<E> list;
 
 	SNode<E> currentNode;
 
-	public SListIterator(SList<E> list) {
+	public SListIterator(ISList<E> list) {
 		this.list = list;
-		this.currentNode = list.firstNode;
+		this.currentNode = list.getFirstNode();
 	}
 
 	@Override
 	public boolean isValid() {
 		return this.currentNode != null;
+	}
+
+	@Override
+	public SNode<E> getCurrentNode() {
+		return this.currentNode;
 	}
 
 	@Override
