@@ -10,12 +10,10 @@ public class Side {
 	float[] tracksDurationFromZeroSec;
 	
 	//default constructor
-	public Side(){}
-	
-	//parameterized constructor
-	public Side(AList<Song> s){
-		this.songs=s;
+	public Side(){
+		this.songs=new AList<Song>();
 	}
+	
 	
 	//get method
 	public AList<Song> getSide(){

@@ -64,6 +64,11 @@ public class Record {
 		return this.recordSpeed;
 	}
 	
+	@Override
+	public String toString() {
+		return " "+recordPerformer.getName() + " from the album: " + this.title;
+	}
+	
 	//add track with the same performer as the record
 	public void addTrack(int side, String title, Genre genre, int year, float duration, boolean composed, boolean recorded, boolean studio){
 		this.sides[side].getSide().addLast(new Song(title, genre, this.recordPerformer, year, duration, composed, recorded, studio));
