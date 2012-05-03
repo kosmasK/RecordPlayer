@@ -23,9 +23,6 @@ public class Record {
 	}
 	
 	//set methods
-	/*public void setSides(Side[] s){
-		this.sides=s;
-	}*/
 		
 	public void setRecordPerformer(Performer p){
 		this.recordPerformer=p;

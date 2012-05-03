@@ -5,7 +5,8 @@ public class Song {
 	private Genre genre;
 	private Performer artist;
 	private int year;
-	private float duration;		
+	private float duration;		// duration in seconds
+	private float startPoint;	// starting point for the stylus in seconds
 	private boolean composed;	// TRUE = composed by the performer, FALSE=performed by the performer
 	private boolean recorded;	// TRUE = recorded at this year, FALSE=composed at this year
 	private boolean studio;		// TRUE = studio recording, FALSE=live recording
@@ -46,6 +47,10 @@ public class Song {
 		this.duration=d;
 	}
 	
+	public void setStartPoint(float s){
+		this.startPoint=s;
+	}
+	
 	public void setComposed(boolean c){
 		this.composed=c;
 	}
@@ -77,6 +82,10 @@ public class Song {
 	
 	public float getDuration(){
 		return this.duration;
+	}
+	
+	public Float getStartPoint(){
+		return this.startPoint;
 	}
 	
 	public boolean getComposed(){

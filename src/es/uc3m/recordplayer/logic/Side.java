@@ -7,13 +7,12 @@ public class Side {
 	
 	private AList<Song> songs;
 	private float totalDuration;
-	float[] tracksDurationFromZeroSec;
 	
 	//default constructor
 	public Side(){
 		this.songs=new AList<Song>();
+		this.totalDuration=-1.0f; // initial value for uncalculated total duration 
 	}
-	
 	
 	//get method
 	public AList<Song> getSide(){
@@ -27,21 +26,21 @@ public class Side {
 	
 	//get total side duration
 	public float getTotalSideDuration(){
-		return calculateTotalSideDuration();
+		if (this.totalDuration==-1.0f){
+			return calculateTotalSideDuration();
+		}
+		else{
+			return this.totalDuration;
+		}
 	}
 	
 	//calculate total side duration
 	private float calculateTotalSideDuration(){
 		this.totalDuration=0.0f;
-		this.tracksDurationFromZeroSec=new float[this.songs.getSize()];
-		int i=0;
 		for (AListIterator<Song> iterator = this.songs.createIterator(); iterator.isValid(); iterator.moveNext()){ 
 			//calculate the duration in seconds
-			int decimalTrackDuration=(int)((iterator.getCurrentElem().getDuration()-(int)iterator.getCurrentElem().getDuration())*100);
-			this.totalDuration=this.totalDuration+(60*(int)iterator.getCurrentElem().getDuration())+decimalTrackDuration;
-			
-			this.tracksDurationFromZeroSec[i]=this.totalDuration;
-			i++;
+			iterator.getCurrentElem().setStartPoint(this.totalDuration);
+			this.totalDuration=this.totalDuration+iterator.getCurrentElem().getDuration();
 		}
 		return this.totalDuration/60; //result in minutes
 	}
@@ -59,20 +58,16 @@ public class Side {
 	public float getStylusPositionByTrack(String t){
 		
 		//check if total duration has been calculated before
-		if (this.tracksDurationFromZeroSec.length==0){
+		if (this.totalDuration==-1.0f){
 			calculateTotalSideDuration();
 		}
 		
-		int i=0;
 		for (AListIterator<Song> iterator = this.songs.createIterator(); iterator.isValid(); iterator.moveNext()){ 
 			//check for the title
 			if (iterator.getCurrentElem().getTitle().equals(t)){
-				int decimalTrackDuration=(int)((iterator.getCurrentElem().getDuration()-(int)iterator.getCurrentElem().getDuration())*100);
-				return ((this.tracksDurationFromZeroSec[i]-(60*(int)iterator.getCurrentElem().getDuration())+decimalTrackDuration)*100)/this.totalDuration;
+				return (iterator.getCurrentElem().getStartPoint()*100)/this.totalDuration;				
 			}			
-			i++;
-		}
-		
+		}		
 		return -1; //error case
 	}
 	
@@ -80,27 +75,16 @@ public class Side {
 	public Song getTrackByStylusPosition(float stylusPos){
 		
 		//check if total duration has been calculated before
-		if (this.tracksDurationFromZeroSec.length==0){
+		if (this.totalDuration==-1.0f){
 			calculateTotalSideDuration();
 		}
-
-		int i=0;
-		for (AListIterator<Song> iterator = this.songs.createIterator(); iterator.isValid(); iterator.moveNext()){ 
-			
-			if (i==0){
-				if(stylusPos>=0.00f && stylusPos<(this.tracksDurationFromZeroSec[i]/this.totalDuration)*100){
-					return iterator.getCurrentElem();
-				}
-			}
-			else{
-				if(stylusPos>=(this.tracksDurationFromZeroSec[i-1]/this.totalDuration)*100 && stylusPos<(this.tracksDurationFromZeroSec[i]/this.totalDuration)*100){
-					return iterator.getCurrentElem();
-				}
-			}		
-			
-			i++;
-		}
 		
+		for (AListIterator<Song> iterator = this.songs.createIterator(); iterator.isValid(); iterator.moveNext()){ 				
+				if(stylusPos>=((iterator.getCurrentElem().getStartPoint()*100)/this.totalDuration) && 
+						stylusPos<(((iterator.getCurrentElem().getStartPoint()+iterator.getCurrentElem().getDuration())*100)/this.totalDuration)){
+					return iterator.getCurrentElem();
+				}												
+		}		
 		return null; //error case
 	}
 }//end of class
