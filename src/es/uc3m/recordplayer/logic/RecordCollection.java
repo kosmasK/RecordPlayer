@@ -67,7 +67,7 @@ public class RecordCollection extends SList<Record> {
 			//side loop
 			for (int j=0; i<2; j++){
 				//track iteration
-				for (AListIterator<Song> iterator2= iterator.getCurrentElem().getSides()[j].getSide().createIterator(); iterator2.isValid();
+				for (AListIterator<Song> iterator2= iterator.getCurrentElem().getSide(j).getSideTracklist().createIterator(); iterator2.isValid();
 						iterator2.moveNext()){
 					// Check for the genre
 					if (iterator2.getCurrentElem().getGenre().equals(g)){
@@ -98,7 +98,7 @@ public class RecordCollection extends SList<Record> {
 			//side loop
 			for (int j=0; i<2; j++){
 				//track iteration
-				for (AListIterator<Song> iterator2= iterator.getCurrentElem().getSides()[j].getSide().createIterator(); iterator2.isValid();
+				for (AListIterator<Song> iterator2= iterator.getCurrentElem().getSide(j).getSideTracklist().createIterator(); iterator2.isValid();
 						iterator2.moveNext()){
 					// Check for the title
 					if (iterator2.getCurrentElem().getTitle().equals(t)){

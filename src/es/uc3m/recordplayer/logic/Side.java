@@ -15,7 +15,7 @@ public class Side {
 	}
 	
 	//get method
-	public AList<Song> getSide(){
+	public AList<Song> getSideTracklist(){
 		return this.songs;
 	}
 	
