@@ -1,48 +1,60 @@
 package es.uc3m.recordplayer.Interfaces.ITurntable;
 
 import es.uc3m.eda.list.IList;
+import es.uc3m.eda.list.IStack;
+import es.uc3m.eda.list.singlelink.SStack;
+import es.uc3m.recordplayer.Interfaces.IAxle.Axle;
 import es.uc3m.recordplayer.Interfaces.IAxle.IAxle;
 import es.uc3m.recordplayer.logic.Record;
 import es.uc3m.recordplayer.logic.Rpm;
+import es.uc3m.recordplayer.logic.Side;
 
 public class Turntable implements ITurntable {
-
+	
+	private IAxle axle;
+	private IStack<Side> playingRecords;
+	private boolean playing;
+	private Rpm rpm;
+	
+	
+	public Turntable(){
+		this.axle=new Axle();
+		this.playingRecords=new SStack<Side>();
+	}
+	
 	@Override
 	public void start() {
-		// TODO Auto-generated method stub
-		
+		this.playing=true;		
 	}
 
 	@Override
 	public void stop() {
-		// TODO Auto-generated method stub
-		
+		this.playing=false;		
 	}
 
 	@Override
 	public boolean isStarted() {
-		// TODO Auto-generated method stub
-		return false;
+		return this.playing;
 	}
 
 	@Override
 	public void setRpm(Rpm rpm) {
-		// TODO Auto-generated method stub
-		
+		this.rpm=rpm;	
+		//this.rpm=this.playingRecords.top().getRecord().getRpm();		
 	}
 
 	@Override
 	public Rpm getRpm() {
-		// TODO Auto-generated method stub
-		return null;
+		return this.rpm;
 	}
 
 	@Override
-	public void putRecord(Record record, char sideIndex) {
-		// TODO Auto-generated method stub
-		
+	public void putRecord(Side side) {
+		this.playingRecords.push(side);		
 	}
 
+	
+	///what is for
 	@Override
 	public IList<Record> removeRecords() {
 		// TODO Auto-generated method stub
@@ -51,38 +63,39 @@ public class Turntable implements ITurntable {
 
 	@Override
 	public boolean isEmpty() {
-		// TODO Auto-generated method stub
-		return false;
+		return this.playingRecords.isEmpty();
 	}
 
 	@Override
 	public boolean hasAxle() {
-		// TODO Auto-generated method stub
-		return false;
+		return this.axle.isPinned();
 	}
 
 	@Override
 	public void pinAxle(IAxle axle) {
-		// TODO Auto-generated method stub
-		
+		this.axle.pinOnTurntable(this);		
 	}
 
 	@Override
 	public void unpinAxle() {
-		// TODO Auto-generated method stub
-		
+		this.axle.unpinFromTurntable();		
 	}
 
 	@Override
 	public Record getTopRecord() {
-		// TODO Auto-generated method stub
-		return null;
+		return this.playingRecords.top().getRecord();
 	}
 
 	@Override
-	public char getTopSideIndex() {
-		// TODO Auto-generated method stub
-		return 0;
+	public int getTopSideIndex() {		
+		int i;
+		for (i=0; i<2; i++){
+			if (getTopRecord().getSide(i).equals(this.playingRecords.top())){				
+				break;
+			}
+		
+		}// TODO Auto-generated method stub
+		return i;
 	}
 
 }

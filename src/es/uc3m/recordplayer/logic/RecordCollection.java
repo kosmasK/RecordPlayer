@@ -65,7 +65,7 @@ public class RecordCollection extends SList<Record> {
 		for (SListIterator<Record> iterator = createIterator(); iterator.isValid(); iterator.moveNext()) {			
 			//side=iterator.getCurrentElem().getSides();
 			//side loop
-			for (int j=0; i<2; j++){
+			for (int j=0; j<2; j++){
 				//track iteration
 				for (AListIterator<Song> iterator2= iterator.getCurrentElem().getSide(j).getSideTracklist().createIterator(); iterator2.isValid();
 						iterator2.moveNext()){
@@ -96,7 +96,7 @@ public class RecordCollection extends SList<Record> {
 		for (SListIterator<Record> iterator = createIterator(); iterator.isValid(); iterator.moveNext()) {			
 			//side=iterator.getCurrentElem().getSides();
 			//side loop
-			for (int j=0; i<2; j++){
+			for (int j=0; j<2; j++){
 				//track iteration
 				for (AListIterator<Song> iterator2= iterator.getCurrentElem().getSide(j).getSideTracklist().createIterator(); iterator2.isValid();
 						iterator2.moveNext()){
@@ -115,6 +115,29 @@ public class RecordCollection extends SList<Record> {
 		else{
 			return recordsBySongTitle;
 		}
+	}
+	
+	//get side with the specific track title (record is notified in the side structure)
+	
+	public Side getSideByTrackTitle(String t){
+
+		//record iteration
+		for (SListIterator<Record> iterator = createIterator(); iterator.isValid(); iterator.moveNext()) {			
+			//side=iterator.getCurrentElem().getSides();
+			//side loop
+			for (int j=0; j<2; j++){
+				//track iteration
+				for (AListIterator<Song> iterator2= iterator.getCurrentElem().getSide(j).getSideTracklist().createIterator(); iterator2.isValid();
+						iterator2.moveNext()){
+					// Check for the title
+					if (iterator2.getCurrentElem().getTitle().equals(t)){
+						return iterator.getCurrentElem().getSide(j);
+						
+					}//end of title check
+				}//end of track iteration
+			}//end of side loop
+		}//end of record iteration
+		return null;
 	}
 	
 }

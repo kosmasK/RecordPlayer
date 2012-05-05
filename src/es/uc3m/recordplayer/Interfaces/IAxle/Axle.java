@@ -3,19 +3,18 @@ package es.uc3m.recordplayer.Interfaces.IAxle;
 import es.uc3m.eda.list.IQueue;
 import es.uc3m.eda.list.singlelink.SQueue;
 import es.uc3m.recordplayer.Interfaces.ITurntable.ITurntable;
-import es.uc3m.recordplayer.logic.Record;
+import es.uc3m.recordplayer.logic.Side;
 
 public class Axle implements IAxle{
-	private IQueue<Record> waitingRecords;
+	private IQueue<Side> waitingRecords;
 	private boolean pinned;
 	private ITurntable turntable;
-	private char sideIndex;
 	private int size;
 	
 	//default constructor
 	public Axle(){
 		this.turntable=null;
-		this.waitingRecords= new SQueue<Record>();
+		this.waitingRecords= new SQueue<Side>();
 		this.size=0;
 	}
 	
@@ -35,9 +34,9 @@ public class Axle implements IAxle{
 	}
 
 	@Override
-	public void putRecord(Record record, char sideIndex) {
+	public void putRecord(Side side) {
 		if(this.isPinned() && (this.isFull()==false)){
-			this.waitingRecords.enqueue(record);
+			this.waitingRecords.enqueue(side);
 			this.size++;
 		}
 		
@@ -46,7 +45,7 @@ public class Axle implements IAxle{
 	@Override
 	public void dropRecord() {
 		if(size>0){
-			this.turntable.putRecord(this.waitingRecords.dequeue(), this.sideIndex);
+			this.turntable.putRecord(this.waitingRecords.dequeue());
 			size--;
 		}
 	}
