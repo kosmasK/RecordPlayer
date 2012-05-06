@@ -1,4 +1,6 @@
-package es.uc3m.recordplayer.interfaces.stylus;
+package es.uc3m.recordplayer.logic;
+
+import es.uc3m.recordplayer.interfaces.stylus.IStylus;
 
 public class Stylus implements IStylus {
 	private float position;

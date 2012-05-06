@@ -1,6 +1,6 @@
-package es.uc3m.recordplayer.interfaces.recordshelf;
+package es.uc3m.recordplayer.logic;
 
-import es.uc3m.recordplayer.logic.Record;
+import es.uc3m.recordplayer.interfaces.recordshelf.IRecordShelf;
 
 public class RecordShelf implements IRecordShelf {
 	
