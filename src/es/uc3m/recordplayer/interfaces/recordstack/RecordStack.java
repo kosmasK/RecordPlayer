@@ -1,4 +1,4 @@
-package es.uc3m.recordplayer.Interfaces.IRecordStack;
+package es.uc3m.recordplayer.interfaces.recordstack;
 
 import es.uc3m.eda.list.singlelink.SStack;
 import es.uc3m.recordplayer.logic.Record;

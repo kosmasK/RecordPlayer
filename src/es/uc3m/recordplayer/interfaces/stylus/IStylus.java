@@ -1,4 +1,4 @@
-package es.uc3m.recordplayer.Interfaces.IStylus;
+package es.uc3m.recordplayer.interfaces.stylus;
 
 public interface IStylus {
 	public boolean isParked();

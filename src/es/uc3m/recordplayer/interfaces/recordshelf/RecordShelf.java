@@ -1,4 +1,4 @@
-package es.uc3m.recordplayer.Interfaces.IRecordShelf;
+package es.uc3m.recordplayer.interfaces.recordshelf;
 
 import es.uc3m.recordplayer.logic.Record;
 

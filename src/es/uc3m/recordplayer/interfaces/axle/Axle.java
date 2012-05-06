@@ -1,8 +1,8 @@
-package es.uc3m.recordplayer.Interfaces.IAxle;
+package es.uc3m.recordplayer.interfaces.axle;
 
 import es.uc3m.eda.list.IQueue;
 import es.uc3m.eda.list.singlelink.SQueue;
-import es.uc3m.recordplayer.Interfaces.ITurntable.ITurntable;
+import es.uc3m.recordplayer.interfaces.turntable.ITurntable;
 import es.uc3m.recordplayer.logic.Side;
 
 public class Axle implements IAxle{

@@ -1,12 +1,12 @@
-package es.uc3m.recordplayer.Interfaces.IPlayer;
+package es.uc3m.recordplayer.interfaces.player;
 
 import es.uc3m.eda.list.IList;
-import es.uc3m.recordplayer.Interfaces.IAxle.Axle;
-import es.uc3m.recordplayer.Interfaces.IAxle.IAxle;
-import es.uc3m.recordplayer.Interfaces.IStylus.IStylus;
-import es.uc3m.recordplayer.Interfaces.IStylus.Stylus;
-import es.uc3m.recordplayer.Interfaces.ITurntable.ITurntable;
-import es.uc3m.recordplayer.Interfaces.ITurntable.Turntable;
+import es.uc3m.recordplayer.interfaces.axle.Axle;
+import es.uc3m.recordplayer.interfaces.axle.IAxle;
+import es.uc3m.recordplayer.interfaces.stylus.IStylus;
+import es.uc3m.recordplayer.interfaces.stylus.Stylus;
+import es.uc3m.recordplayer.interfaces.turntable.ITurntable;
+import es.uc3m.recordplayer.interfaces.turntable.Turntable;
 import es.uc3m.recordplayer.logic.Record;
 import es.uc3m.recordplayer.logic.Rpm;
 import es.uc3m.recordplayer.logic.Side;

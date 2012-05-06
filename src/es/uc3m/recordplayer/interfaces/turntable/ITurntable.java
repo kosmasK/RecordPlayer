@@ -1,8 +1,8 @@
-package es.uc3m.recordplayer.Interfaces.ITurntable;
+package es.uc3m.recordplayer.interfaces.turntable;
 
 
 import es.uc3m.eda.list.IList;
-import es.uc3m.recordplayer.Interfaces.IAxle.*;
+import es.uc3m.recordplayer.interfaces.axle.*;
 import es.uc3m.recordplayer.logic.Record;
 import es.uc3m.recordplayer.logic.Rpm;
 import es.uc3m.recordplayer.logic.Side;

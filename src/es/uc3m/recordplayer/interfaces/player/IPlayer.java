@@ -1,4 +1,4 @@
-package es.uc3m.recordplayer.Interfaces.IPlayer;
+package es.uc3m.recordplayer.interfaces.player;
 
 import es.uc3m.eda.list.IList;
 import es.uc3m.recordplayer.logic.Record;
