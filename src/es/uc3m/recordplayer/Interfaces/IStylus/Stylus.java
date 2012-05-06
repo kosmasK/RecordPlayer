@@ -1,53 +1,60 @@
 package es.uc3m.recordplayer.Interfaces.IStylus;
 
 public class Stylus implements IStylus {
-
+	private float position;
+	private boolean dropped;
+	private boolean parked;
+	
+	public Stylus(){
+		this.parked=true;
+		this.position=-1.0f;
+		this.dropped=true;
+	}
+	
+	
 	@Override
 	public boolean isParked() {
-		// TODO Auto-generated method stub
-		return false;
+		return this.parked;
 	}
 
 	@Override
 	public void park() {
-		// TODO Auto-generated method stub
-		
+		this.parked=true;
+		this.position=-1.0f;
+		this.dropped=true;
 	}
 
 	@Override
 	public void unpark() {
-		// TODO Auto-generated method stub
-		
+		if (isParked()){
+			lift();
+			setPosition(0.0f);
+		}
 	}
 
 	@Override
 	public boolean isDropped() {
-		// TODO Auto-generated method stub
-		return false;
+		return this.dropped;
 	}
 
 	@Override
 	public void lift() {
-		// TODO Auto-generated method stub
-		
+		this.dropped=false;
 	}
 
 	@Override
 	public void drop() {
-		// TODO Auto-generated method stub
-		
+		this.dropped=true;
 	}
 
 	@Override
 	public void setPosition(float position) {
-		// TODO Auto-generated method stub
-		
+		this.position=position;	
 	}
 
 	@Override
 	public float getPosition() {
-		// TODO Auto-generated method stub
-		return 0;
+		return this.position;
 	}
 
 }

@@ -54,7 +54,7 @@ public class Turntable implements ITurntable {
 	}
 
 	
-	///what is for
+	///how to implement this method?
 	@Override
 	public IList<Record> removeRecords() {
 		// TODO Auto-generated method stub
@@ -86,6 +86,7 @@ public class Turntable implements ITurntable {
 		return this.playingRecords.top().getRecord();
 	}
 
+	//is it correct?
 	@Override
 	public int getTopSideIndex() {		
 		int i;
