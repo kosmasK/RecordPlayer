@@ -1,142 +1,155 @@
 package es.uc3m.recordplayer.Interfaces.IPlayer;
 
 import es.uc3m.eda.list.IList;
+import es.uc3m.recordplayer.Interfaces.IAxle.Axle;
+import es.uc3m.recordplayer.Interfaces.IAxle.IAxle;
+import es.uc3m.recordplayer.Interfaces.IStylus.IStylus;
+import es.uc3m.recordplayer.Interfaces.IStylus.Stylus;
+import es.uc3m.recordplayer.Interfaces.ITurntable.ITurntable;
+import es.uc3m.recordplayer.Interfaces.ITurntable.Turntable;
 import es.uc3m.recordplayer.logic.Record;
 import es.uc3m.recordplayer.logic.Rpm;
+import es.uc3m.recordplayer.logic.Side;
 import es.uc3m.recordplayer.logic.Song;
 
 public class Player implements IPlayer {
-
+	
+	private ITurntable turntable;
+	private IAxle axle;
+	private IStylus stylus;
+	
+	public Player(){
+		this.turntable=new Turntable();
+		this.axle=new Axle();
+		this.stylus=new Stylus(); 
+	}
+	
 	@Override
 	public boolean isAxlePinned() {
-		// TODO Auto-generated method stub
-		return false;
+		return this.axle.isPinned();
 	}
 
 	@Override
 	public void pinAxle() {
-		// TODO Auto-generated method stub
-		
+		this.axle.pinOnTurntable(turntable);
 	}
 
 	@Override
 	public boolean isAxleEmpty() {
-		// TODO Auto-generated method stub
-		return false;
+		return this.axle.isEmpty();
 	}
 
 	@Override
 	public boolean isAxleFull() {
-		// TODO Auto-generated method stub
-		return false;
+		return this.axle.isFull();
 	}
 
 	@Override
 	public boolean isTurntableStarted() {
-		// TODO Auto-generated method stub
-		return false;
+		return this.turntable.isStarted();
 	}
 
 	@Override
 	public void startTurntable() {
-		// TODO Auto-generated method stub
-		
+		this.turntable.start();
 	}
 
 	@Override
 	public void stopTurntable() {
-		// TODO Auto-generated method stub
-		
+		if (isStylusDropped()==false){
+			this.turntable.stop();
+		}
 	}
 
 	@Override
-	public void setTurntableRpm(Rpm rpm) {
-		// TODO Auto-generated method stub
-		
+	public void setTurntableRpm() {
+		if (isStylusDropped()==false){
+			this.turntable.setRpm();
+		}
 	}
 
 	@Override
 	public Rpm getTurntableRpm() {
-		// TODO Auto-generated method stub
-		return null;
+		return this.turntable.getRpm();
 	}
 
 	@Override
-	public void putRecordInAxle(Record record, char sideIndex) {
-		// TODO Auto-generated method stub
-		
+	public void putRecordInAxle(Side side) {
+		this.axle.putRecord(side);
 	}
 
 	@Override
 	public void dropRecordFromAxle() {
-		// TODO Auto-generated method stub
-		
+		if(this.stylus.isParked()){
+			this.axle.dropRecord();
+		}
 	}
 
 	@Override
 	public IList<Record> removeAllRecordsFromTurntable() {
-		// TODO Auto-generated method stub
-		return null;
+		this.stylus.park();
+		this.turntable.stop();
+		return this.turntable.removeRecords();
 	}
 
 	@Override
 	public boolean isStylusParked() {
-		// TODO Auto-generated method stub
-		return false;
+		return this.stylus.isParked();
 	}
 
 	@Override
 	public void parkStylus() {
-		// TODO Auto-generated method stub
-		
+		this.stylus.park();
 	}
 
 	@Override
 	public void unparkStylus() {
-		// TODO Auto-generated method stub
-		
+		this.stylus.unpark();
 	}
 
 	@Override
 	public boolean isStylusDropped() {
-		// TODO Auto-generated method stub
-		return false;
+		return this.stylus.isDropped();
 	}
 
 	@Override
 	public void liftStylus() {
-		// TODO Auto-generated method stub
-		
+		this.stylus.lift();
 	}
 
 	@Override
 	public void dropStylus() {
-		// TODO Auto-generated method stub
-		
+		if (this.turntable.isStarted() && (this.turntable.isEmpty()==false)){
+			this.stylus.drop();
+		}
 	}
 
 	@Override
 	public void setStylusPosition(float position) {
-		// TODO Auto-generated method stub
-		
+		this.stylus.setPosition(position);
 	}
 
 	@Override
 	public Record getTopRecord() {
-		// TODO Auto-generated method stub
-		return null;
+		return this.turntable.getTopRecord();
 	}
 
 	@Override
-	public char getTopSideIndex() {
-		// TODO Auto-generated method stub
-		return 0;
+	public int getTopSideIndex() {
+		return this.turntable.getTopSideIndex();
 	}
 
 	@Override
 	public Song getPlayingTrack() {
-		// TODO Auto-generated method stub
-		return null;
+		if(this.turntable.isStarted()==false 
+				|| this.stylus.isParked() 
+				|| this.stylus.isDropped()==false 
+				|| (this.turntable.getRpm().equals(this.turntable.getTopRecord().getRpm()))==false){
+			return null;
+		}
+		else{
+			return getTopRecord().getSide(getTopSideIndex()).getTrackByStylusPosition(this.stylus.getPosition());
+	
+		}
 	}
-
 }

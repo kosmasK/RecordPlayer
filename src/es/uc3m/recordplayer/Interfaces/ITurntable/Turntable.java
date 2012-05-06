@@ -2,6 +2,7 @@ package es.uc3m.recordplayer.Interfaces.ITurntable;
 
 import es.uc3m.eda.list.IList;
 import es.uc3m.eda.list.IStack;
+import es.uc3m.eda.list.singlelink.SList;
 import es.uc3m.eda.list.singlelink.SStack;
 import es.uc3m.recordplayer.Interfaces.IAxle.Axle;
 import es.uc3m.recordplayer.Interfaces.IAxle.IAxle;
@@ -38,9 +39,8 @@ public class Turntable implements ITurntable {
 	}
 
 	@Override
-	public void setRpm(Rpm rpm) {
-		this.rpm=rpm;	
-		//this.rpm=this.playingRecords.top().getRecord().getRpm();		
+	public void setRpm() {	
+		this.rpm=this.playingRecords.top().getRecord().getRpm();		
 	}
 
 	@Override
@@ -50,15 +50,23 @@ public class Turntable implements ITurntable {
 
 	@Override
 	public void putRecord(Side side) {
-		this.playingRecords.push(side);		
+		this.playingRecords.push(side);
+		start();
 	}
 
 	
 	///how to implement this method?
 	@Override
 	public IList<Record> removeRecords() {
-		// TODO Auto-generated method stub
-		return null;
+		IList<Record> removedRecords=new SList<Record>();
+		while(!this.axle.isEmpty()){		//<------is it correct like this?
+			this.axle.dropRecord();
+		}
+		this.axle.unpinFromTurntable();
+		while(this.playingRecords.isEmpty()==false){   //<------is it correct?
+			removedRecords.addLast(this.playingRecords.pop().getRecord());
+		}		
+		return removedRecords;
 	}
 
 	@Override
@@ -93,9 +101,8 @@ public class Turntable implements ITurntable {
 		for (i=0; i<2; i++){
 			if (getTopRecord().getSide(i).equals(this.playingRecords.top())){				
 				break;
-			}
-		
-		}// TODO Auto-generated method stub
+			}		
+		}
 		return i;
 	}
 

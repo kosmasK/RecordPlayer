@@ -49,7 +49,9 @@ public class Stylus implements IStylus {
 
 	@Override
 	public void setPosition(float position) {
-		this.position=position;	
+		if (this.dropped==false){
+			this.position=position;	
+		}
 	}
 
 	@Override

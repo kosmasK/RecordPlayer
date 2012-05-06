@@ -11,7 +11,7 @@ public interface ITurntable {
 	public void start();
 	public void stop();
 	public boolean isStarted();
-	public void setRpm(Rpm rpm);
+	public void setRpm();
 	public Rpm getRpm();
 	public void putRecord(Side side);
 	public IList<Record> removeRecords();

@@ -9,7 +9,7 @@ public class Axle implements IAxle{
 	private IQueue<Side> waitingRecords;
 	private boolean pinned;
 	private ITurntable turntable;
-	private int size;
+	private int size; //<-------- is it correct?
 	
 	//default constructor
 	public Axle(){
@@ -27,7 +27,7 @@ public class Axle implements IAxle{
 
 	@Override
 	public void unpinFromTurntable() {
-		if (this.isEmpty()){
+		if (isEmpty()){
 			this.turntable=null;
 			this.pinned=false;
 		}
@@ -35,7 +35,7 @@ public class Axle implements IAxle{
 
 	@Override
 	public void putRecord(Side side) {
-		if(this.isPinned() && (this.isFull()==false)){
+		if(isPinned() && (!isFull())){
 			this.waitingRecords.enqueue(side);
 			this.size++;
 		}
