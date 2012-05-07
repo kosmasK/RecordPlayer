@@ -7,9 +7,9 @@ public class Song {
 	private int year;
 	private float duration;		// duration in seconds
 	private float startPoint;	// starting point for the stylus in seconds
-	private boolean composed;	// TRUE = composed by the performer, FALSE=performed by the performer
-	private boolean recorded;	// TRUE = recorded at this year, FALSE=composed at this year
-	private boolean studio;		// TRUE = studio recording, FALSE=live recording
+	private boolean isComposed;	// TRUE = composed by the performer, FALSE=performed by the performer
+	private boolean isRecorded;	// TRUE = recorded at this year, FALSE=composed at this year
+	private boolean isStudio;		// TRUE = studio recording, FALSE=live recording
 	
 	//default constructor
 	public Song(){}
@@ -21,9 +21,9 @@ public class Song {
 		this.artist=a;
 		this.year=y;
 		this.duration=d;
-		this.composed=c;
-		this.recorded=r;
-		this.studio=s;
+		this.isComposed=c;
+		this.isRecorded=r;
+		this.isStudio=s;
 	}
 	
 	//set methods
@@ -51,16 +51,16 @@ public class Song {
 		this.startPoint=s;
 	}
 	
-	public void setComposed(boolean c){
-		this.composed=c;
+	public void setIsComposed(boolean c){
+		this.isComposed=c;
 	}
 	
-	public void setRecorded(boolean r){
-		this.recorded=r;
+	public void setIsRecorded(boolean r){
+		this.isRecorded=r;
 	}
 	
-	public void setStudio(boolean s){
-		this.studio=s;
+	public void setIsStudio(boolean s){
+		this.isStudio=s;
 	}
 	
 	//get methods
@@ -88,15 +88,44 @@ public class Song {
 		return this.startPoint;
 	}
 	
-	public boolean getComposed(){
-		return this.composed;
+	public boolean isComposed(){
+		return this.isComposed;
 	}
 	
-	public boolean getRecorded(){
-		return this.recorded;
+	public boolean isRecorded(){
+		return this.isRecorded;
 	}
 	
-	public boolean getStudio(){
-		return this.studio;
+	public boolean isStudio(){
+		return this.isStudio;
+	}
+	
+	@Override
+	public String toString(){
+		String genre;
+		
+		//Transform genre type to a readable text
+		if (this.genre.equals(Genre.ROCK))
+			genre = "ROCK";
+		else if (this.genre.equals(Genre.CLASSICAL))
+			genre = "CLASSICAL";
+		else if (this.genre.equals(Genre.DANCE))
+			genre = "DANCE";
+		else if (this.genre.equals(Genre.JAZZ))
+			genre = "JAZZ";
+		else if (this.genre.equals(Genre.POP))
+			genre = "POP";
+		else
+			genre = "OTHER";		
+		
+		return "Title: "+this.title 
+				+", Artist: "+this.artist
+				+", Genre: "+genre 				 
+				+", Year: "+this.year 
+				+", Duration: "+this.duration
+				+", Composed:"+this.isComposed
+				+", Performed by:"+this.isRecorded
+				+", Studio Recording"+this.isStudio
+				+"\n";	
 	}
 }

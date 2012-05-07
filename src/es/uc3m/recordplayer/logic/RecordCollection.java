@@ -10,23 +10,7 @@ public class RecordCollection extends SList<Record> {
 	
 	//default constructor
 	public RecordCollection(){}
-	
-	//parameterized constructor
-	/*
-	public RecordCollection(SList<Record> r){
-		this.recordList=r;
-	}
-	
-	//set method
-	public void setRecordList(SList<Record> r){
-		this.recordList=r;
-	}
-	
-	//get method
-	public SList<Record> getRecordList(){
-		return this.recordList;
-	}
-	*/
+
 	
 	//get record with the specific title
 	public Record getRecordByTitle(String t){
@@ -40,11 +24,9 @@ public class RecordCollection extends SList<Record> {
 	//get records by the specific performer
 	public AList<Record> getRecordsByPerfomer(Performer p){
 		AList<Record> performerRecords = new AList<Record>();
-		int i=0;
 		for (SListIterator<Record> iterator = createIterator(); iterator.isValid(); iterator.moveNext()) {			
 			if (iterator.getCurrentElem().getRecordPerformer().equals(p)){
-				performerRecords.insertAt(i,iterator.getCurrentElem());
-				i++;
+				addLast(iterator.getCurrentElem());
 			}
 		}//end of loop
 		if (performerRecords.isEmpty()){
@@ -58,22 +40,20 @@ public class RecordCollection extends SList<Record> {
 	//get tracks by the specific genre
 	public AList<Song> getTracksByGenre(Genre g){
 		AList<Song> tracksByGenre = new AList<Song>();
-		int i=0;
-		//Side[] side=new Side[2];
 		
 		//record iteration
 		for (SListIterator<Record> iterator = createIterator(); iterator.isValid(); iterator.moveNext()) {			
-			//side=iterator.getCurrentElem().getSides();
 			//side loop
 			for (int j=0; j<2; j++){
 				//track iteration
-				for (AListIterator<Song> iterator2= iterator.getCurrentElem().getSide(j).getSideTracklist().createIterator(); iterator2.isValid();
-						iterator2.moveNext()){
+				for (AListIterator<Song> iterator2= iterator.getCurrentElem().getSide(j).getSideTracklist().createIterator(); 
+						iterator2.isValid();iterator2.moveNext()){
+					
 					// Check for the genre
 					if (iterator2.getCurrentElem().getGenre().equals(g)){
-						tracksByGenre.insertAt(i,iterator2.getCurrentElem());
-						i++;
+						tracksByGenre.addLast(iterator2.getCurrentElem());
 					}//end of genre check
+				
 				}//end of track iteration
 			}//end of side loop
 		}//end of record iteration
@@ -89,21 +69,17 @@ public class RecordCollection extends SList<Record> {
 	//get records by the specific track title
 	public AList<Record> getRecordsByTrackTitle(String t){
 		AList<Record> recordsBySongTitle = new AList<Record>();
-		int i=0;
-		//Side[] side=new Side[2];
 		
 		//record iteration
 		for (SListIterator<Record> iterator = createIterator(); iterator.isValid(); iterator.moveNext()) {			
-			//side=iterator.getCurrentElem().getSides();
 			//side loop
 			for (int j=0; j<2; j++){
 				//track iteration
-				for (AListIterator<Song> iterator2= iterator.getCurrentElem().getSide(j).getSideTracklist().createIterator(); iterator2.isValid();
-						iterator2.moveNext()){
+				for (AListIterator<Song> iterator2= iterator.getCurrentElem().getSide(j).getSideTracklist().createIterator(); 
+						iterator2.isValid();iterator2.moveNext()){
 					// Check for the title
 					if (iterator2.getCurrentElem().getTitle().equals(t)){
-						recordsBySongTitle.insertAt(i,iterator.getCurrentElem());
-						i++;
+						recordsBySongTitle.addLast(iterator.getCurrentElem());
 					}//end of title check
 				}//end of track iteration
 			}//end of side loop
@@ -123,12 +99,11 @@ public class RecordCollection extends SList<Record> {
 
 		//record iteration
 		for (SListIterator<Record> iterator = createIterator(); iterator.isValid(); iterator.moveNext()) {			
-			//side=iterator.getCurrentElem().getSides();
 			//side loop
 			for (int j=0; j<2; j++){
 				//track iteration
-				for (AListIterator<Song> iterator2= iterator.getCurrentElem().getSide(j).getSideTracklist().createIterator(); iterator2.isValid();
-						iterator2.moveNext()){
+				for (AListIterator<Song> iterator2= iterator.getCurrentElem().getSide(j).getSideTracklist().createIterator(); 
+						iterator2.isValid();iterator2.moveNext()){
 					// Check for the title
 					if (iterator2.getCurrentElem().getTitle().equals(t)){
 						return iterator.getCurrentElem().getSide(j);

@@ -4,26 +4,26 @@ import es.uc3m.recordplayer.interfaces.stylus.IStylus;
 
 public class Stylus implements IStylus {
 	private float position;
-	private boolean dropped;
-	private boolean parked;
+	private boolean isDropped;
+	private boolean isParked;
 	
 	public Stylus(){
-		this.parked=true;
+		this.isParked=true;
 		this.position=-1.0f;
-		this.dropped=true;
+		this.isDropped=true;
 	}
 	
 	
 	@Override
 	public boolean isParked() {
-		return this.parked;
+		return this.isParked;
 	}
 
 	@Override
 	public void park() {
-		this.parked=true;
+		this.isParked=true;
 		this.position=-1.0f;
-		this.dropped=true;
+		this.isDropped=true;
 	}
 
 	@Override
@@ -36,22 +36,22 @@ public class Stylus implements IStylus {
 
 	@Override
 	public boolean isDropped() {
-		return this.dropped;
+		return this.isDropped;
 	}
 
 	@Override
 	public void lift() {
-		this.dropped=false;
+		this.isDropped=false;
 	}
 
 	@Override
 	public void drop() {
-		this.dropped=true;
+		this.isDropped=true;
 	}
 
 	@Override
 	public void setPosition(float position) {
-		if (this.dropped==false){
+		if (!this.isDropped){
 			this.position=position;	
 		}
 	}

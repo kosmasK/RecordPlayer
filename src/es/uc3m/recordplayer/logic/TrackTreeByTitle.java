@@ -3,7 +3,7 @@ package es.uc3m.recordplayer.logic;
 import es.uc3m.eda.list.singlelink.SListIterator;
 import es.uc3m.eda.tree.BSTNode;
 import es.uc3m.eda.tree.BSTree;
-import es.uc3m.eda.tree.view.BSTreeView;
+//import es.uc3m.eda.tree.view.BSTreeView;
 
 public class TrackTreeByTitle extends BSTree<String, Song> {
 	
@@ -14,42 +14,51 @@ public class TrackTreeByTitle extends BSTree<String, Song> {
 		}
 	}
 	
-	//method that shows the content of the tree
-	public void showTrackTreeByTitle(){   // <======== is it correct?
-		BSTreeView.draw(this);
+	//method that shows the content of the tree InOrder Traversal
+	public void showTrackTreeByTitleInOrder(){ 
+		showTrackTreeByTitleInOrder(getRoot());
+		//BSTreeView.draw(this);
+	}
+	
+	private void showTrackTreeByTitleInOrder(BSTNode<String, Song> node){
+		if (node != null) {
+			showTrackTreeByTitleInOrder(node.getLeftChild());
+	        System.out.print(node.getKey() + " ");
+	        showTrackTreeByTitleInOrder(node.getRightChild());
+	    }
 	}
 	
 	//method that returns if the tree contains a track with a given title
 	public boolean containsTrackByTitle(String title){
-		return containsKey(getRoot(),title);
+		return containsTrackByTitle(getRoot(),title);
 	}
 	
-	private boolean containsKey(BSTNode<String, Song> node, String key) {
+	private boolean containsTrackByTitle(BSTNode<String, Song> node, String title) {
 		if (node == null)
 			return false;
-		if (key.compareTo(node.getKey())<0)		
-			return containsKey(node.getLeftChild(), key);
-		if (key.compareTo(node.getKey())>0)	
-			return containsKey(node.getRightChild(), key);
+		if (title.compareTo(node.getKey())<0)		
+			return containsTrackByTitle(node.getLeftChild(), title);
+		if (title.compareTo(node.getKey())>0)	
+			return containsTrackByTitle(node.getRightChild(), title);
 		return true;
 	}
 	
 	//method that returns a track collection containing tracks that recorded between two years
 	public TrackCollection tracksByYearsRange(int lowBound, int upperBound){
 		TrackCollection collection= new TrackCollection();
-		getYearRange(getRoot(), lowBound, upperBound, collection);
+		tracksByYearsRange(getRoot(), lowBound, upperBound, collection);
 		return collection;
 	}
 	
-	private void getYearRange(BSTNode<String, Song> node, int key1, int key2, TrackCollection result){
+	private void tracksByYearsRange(BSTNode<String, Song> node, int lowBound, int upperBound, TrackCollection collection){
 		if (node != null) {
 			int key = node.getElement().getYear();
-			if (key1 <= key)
-				getYearRange(node.getLeftChild(), key1, key2, result);
-			if (key1 <= key && key <= key2)
-				result.addLast(node.getElement());
-			if (key <= key2)
-				getYearRange(node.getRightChild(), key1, key2, result);
+			if (lowBound <= key)
+				tracksByYearsRange(node.getLeftChild(), lowBound, upperBound, collection);
+			if (lowBound <= key && key <= upperBound)
+				collection.addLast(node.getElement());
+			if (key <= upperBound)
+				tracksByYearsRange(node.getRightChild(), lowBound, upperBound, collection);
 		}
 	}
 		

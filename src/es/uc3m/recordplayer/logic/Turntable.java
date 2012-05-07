@@ -51,16 +51,14 @@ public class Turntable implements ITurntable {
 		start();
 	}
 
-	
-	///how to implement this method?
 	@Override
 	public IList<Record> removeRecords() {
 		IList<Record> removedRecords=new SList<Record>();
-		while(!this.axle.isEmpty()){		//<------is it correct like this?
+		while(!this.axle.isEmpty()){		
 			this.axle.dropRecord();
 		}
 		this.axle.unpinFromTurntable();
-		while(this.playingRecords.isEmpty()==false){   //<------is it correct?
+		while(!this.playingRecords.isEmpty()){  
 			removedRecords.addLast(this.playingRecords.pop().getRecord());
 		}		
 		return removedRecords;
@@ -91,16 +89,18 @@ public class Turntable implements ITurntable {
 		return this.playingRecords.top().getRecord();
 	}
 
-	//is it correct?
 	@Override
-	public int getTopSideIndex() {		
-		int i;
+	public int getTopSideIndex() {			
+		return this.playingRecords.top().getSideIndex();
+		
+		/*int i;
 		for (i=0; i<2; i++){
 			if (getTopRecord().getSide(i).equals(this.playingRecords.top())){				
 				break;
 			}		
 		}
-		return i;
+		return i;*/
 	}
+	
 
 }

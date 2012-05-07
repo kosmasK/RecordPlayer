@@ -9,7 +9,7 @@ public class Axle implements IAxle{
 	private IQueue<Side> waitingRecords;
 	private boolean pinned;
 	private ITurntable turntable;
-	private int size; //<-------- is it correct?
+	private int size; 
 	
 	//default constructor
 	public Axle(){

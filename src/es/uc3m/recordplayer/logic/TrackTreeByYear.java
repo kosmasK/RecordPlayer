@@ -3,7 +3,7 @@ package es.uc3m.recordplayer.logic;
 import es.uc3m.eda.list.singlelink.SListIterator;
 import es.uc3m.eda.tree.BSTNode;
 import es.uc3m.eda.tree.BSTree;
-import es.uc3m.eda.tree.view.BSTreeView;
+//import es.uc3m.eda.tree.view.BSTreeView;
 
 public class TrackTreeByYear extends BSTree<Integer, Song> {
 	
@@ -15,8 +15,17 @@ public class TrackTreeByYear extends BSTree<Integer, Song> {
 	}
 	
 	//method that shows the content of the tree
-	public void showTrackTreeByYear(){
-		BSTreeView.draw(this);
+	public void showTrackTreeByYearInOrder(){
+		showTrackTreeByYearInOrder(getRoot());
+		//BSTreeView.draw(this);
+	}
+	
+	private void showTrackTreeByYearInOrder(BSTNode<Integer, Song> node){
+		if (node != null) {
+			showTrackTreeByYearInOrder(node.getLeftChild());
+	        System.out.print(node.getKey() + " ");
+	        showTrackTreeByYearInOrder(node.getRightChild());
+	    }
 	}
 	
 	//method that returns if the tree contains a track with a given title

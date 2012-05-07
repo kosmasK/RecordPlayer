@@ -50,14 +50,14 @@ public class Player implements IPlayer {
 
 	@Override
 	public void stopTurntable() {
-		if (isStylusDropped()==false){
+		if (!isStylusDropped()){
 			this.turntable.stop();
 		}
 	}
 
 	@Override
 	public void setTurntableRpm() {
-		if (isStylusDropped()==false){
+		if (!isStylusDropped()){
 			this.turntable.setRpm();
 		}
 	}
@@ -135,10 +135,10 @@ public class Player implements IPlayer {
 
 	@Override
 	public Song getPlayingTrack() {
-		if(this.turntable.isStarted()==false 
-				|| this.stylus.isParked() 
-				|| this.stylus.isDropped()==false 
-				|| (this.turntable.getRpm().equals(this.turntable.getTopRecord().getRpm()))==false){
+		if(!this.turntable.isStarted()
+				|| !this.stylus.isParked() 
+				|| !this.stylus.isDropped() 
+				|| !this.turntable.getRpm().equals(this.turntable.getTopRecord().getRpm())){
 			return null;
 		}
 		else{

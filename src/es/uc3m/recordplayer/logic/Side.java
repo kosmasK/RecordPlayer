@@ -8,12 +8,19 @@ public class Side {
 	private AList<Song> songs;
 	private float totalDuration;
 	private Record record;
+	private int sideIndex;
 	
-	//default constructor
-	public Side(Record record){
+	//constructor
+	public Side(Record record, int sideIndex){
 		this.record=record;
 		this.songs=new AList<Song>();
+		this.sideIndex=sideIndex;
 		this.totalDuration=-1.0f; // initial value for uncalculated total duration 
+	}
+	
+	//get method for the side index
+	public int getSideIndex(){
+		return this.sideIndex;
 	}
 	
 	//get method for the tracks that belong to that side

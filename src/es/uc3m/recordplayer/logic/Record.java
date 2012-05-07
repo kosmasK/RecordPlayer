@@ -14,8 +14,8 @@ public class Record {
 	//parameterized constructor
 	public Record(Performer p, String t, int e, Rpm r){
 		this.sides=new Side[2];
-		this.sides[0]=new Side(this);
-		this.sides[1]=new Side(this);
+		this.sides[0]=new Side(this,0);
+		this.sides[1]=new Side(this,1);
 		this.recordPerformer=p;
 		this.title=t;
 		this.editionYear=e;
