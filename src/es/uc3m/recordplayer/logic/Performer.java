@@ -32,4 +32,25 @@ public class Performer {
 		return this.type;
 	}
 	
+	
+	
+	@Override
+	public String toString(){
+		String type;
+		//,,,
+		//Transform performer type type to a readable text
+		if (this.type.equals(PerformerType.SOLOIST_MALE))
+			type = "SOLOIST MALE";
+		else if (this.type.equals(PerformerType.SOILOIST_FEMALE))
+			type = "SOLOIST FEMALE";
+		else if (this.type.equals(PerformerType.GROUP))
+			type = "GROUP";
+		else 
+			type = "OTHERS";
+			
+		
+		return 	"Artist Name: "+this.name
+				+", Arist type: "+type 				 
+				+"\n";	
+	}
 }

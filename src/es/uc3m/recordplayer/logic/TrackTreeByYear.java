@@ -23,23 +23,26 @@ public class TrackTreeByYear extends BSTree<Integer, Song> {
 	private void showTrackTreeByYearInOrder(BSTNode<Integer, Song> node){
 		if (node != null) {
 			showTrackTreeByYearInOrder(node.getLeftChild());
-	        System.out.print(node.getKey() + " ");
+	        System.out.print(node.getElement().getTitle() + " \n");
 	        showTrackTreeByYearInOrder(node.getRightChild());
 	    }
 	}
 	
 	//method that returns if the tree contains a track with a given title
 	public boolean containsTrackByTitle(String title){   // <======== is it correct?
-		return containsKey(getRoot(),title);
+		return containsTrackByTitle(getRoot(),title);
 	}
 	
-	private boolean containsKey(BSTNode<Integer, Song> node, String key) {
+	private boolean containsTrackByTitle(BSTNode<Integer, Song> node, String title) {
 		if (node == null)
 			return false;
-		if (key.compareTo(node.getElement().getTitle())<0)		
-			return containsKey(node.getLeftChild(), key);
-		if (key.compareTo(node.getElement().getTitle())>0)	
-			return containsKey(node.getRightChild(), key);
+		if (title.compareToIgnoreCase(node.getElement().getTitle())<0)	{	
+			System.out.println("!!!!!"+node.getElement().getTitle()+"\n");
+			return containsTrackByTitle(node.getLeftChild(), title);}
+		if (title.compareToIgnoreCase(node.getElement().getTitle())>0)	{
+			System.out.println("!!!!!"+node.getElement().getTitle()+"\n");
+
+			return containsTrackByTitle(node.getRightChild(), title);}
 		return true;
 	}
 	
@@ -53,11 +56,13 @@ public class TrackTreeByYear extends BSTree<Integer, Song> {
 	private void getYearRange(BSTNode<Integer, Song> node, int key1, int key2, TrackCollection result){
 		if (node != null) {
 			int key = node.getKey();
-			if (key1 <= key)
-				getYearRange(node.getLeftChild(), key1, key2, result);
 			if (key1 <= key && key <= key2)
 				result.addLast(node.getElement());
-			if (key <= key2)
+			
+			if (node.hasLeftChild())
+				getYearRange(node.getLeftChild(), key1, key2, result);
+			
+			if (node.hasRightChild())
 				getYearRange(node.getRightChild(), key1, key2, result);
 		}
 	}

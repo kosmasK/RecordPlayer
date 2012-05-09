@@ -27,10 +27,10 @@ public class TrackCollection extends SList<Song>{
 	}
 	
 	//method that returns another track collection containing the tracks performed by a performer
-	public TrackCollection getTrackCollectionByPerformer(Performer p){
+	public TrackCollection getTrackCollectionByPerformer(String artist){
 		TrackCollection performerTrackCollection= new TrackCollection();
 		for (SListIterator<Song> iterator= createIterator(); iterator.isValid();iterator.moveNext()){
-			if (iterator.getCurrentElem().getArtist().equals(p)){
+			if (iterator.getCurrentElem().getArtist().getName().equals(artist)){
 				performerTrackCollection.addLast(iterator.getCurrentElem());
 			}
 		}		

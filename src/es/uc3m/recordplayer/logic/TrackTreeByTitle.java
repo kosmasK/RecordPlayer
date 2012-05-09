@@ -23,7 +23,7 @@ public class TrackTreeByTitle extends BSTree<String, Song> {
 	private void showTrackTreeByTitleInOrder(BSTNode<String, Song> node){
 		if (node != null) {
 			showTrackTreeByTitleInOrder(node.getLeftChild());
-	        System.out.print(node.getKey() + " ");
+	        System.out.print(node.getKey() + " \n");
 	        showTrackTreeByTitleInOrder(node.getRightChild());
 	    }
 	}
@@ -53,11 +53,13 @@ public class TrackTreeByTitle extends BSTree<String, Song> {
 	private void tracksByYearsRange(BSTNode<String, Song> node, int lowBound, int upperBound, TrackCollection collection){
 		if (node != null) {
 			int key = node.getElement().getYear();
-			if (lowBound <= key)
-				tracksByYearsRange(node.getLeftChild(), lowBound, upperBound, collection);
 			if (lowBound <= key && key <= upperBound)
 				collection.addLast(node.getElement());
-			if (key <= upperBound)
+			
+			if (node.hasLeftChild())
+				tracksByYearsRange(node.getLeftChild(), lowBound, upperBound, collection);
+			
+			if (node.hasRightChild())
 				tracksByYearsRange(node.getRightChild(), lowBound, upperBound, collection);
 		}
 	}

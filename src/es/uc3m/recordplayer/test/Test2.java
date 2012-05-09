@@ -12,6 +12,9 @@ public class Test2 {
 	
 	RecordCollection recordCollection;
 	
+	//PART 2
+	
+	
 	IRecordStack stackOne=new RecordStack();
 	IRecordStack stackTwo=new RecordStack();
 	IRecordShelf recordShelf=new RecordShelf(16);
@@ -77,18 +80,61 @@ public class Test2 {
 	
 	
 	
-	/*
+	//Sorts the labels first by title and if same title by year
 	public void sortLabels(){
+		Record temp=new Record();
 		
-	}
-	
-	
-	public void sortRecordByLabel(){
-		for(int i=0; i< this.recordShelf.getSize(); i++){
-			
+		for(int i=1;i<10;i++){
+			for(int j=0;j<10-j;j++){
+				if (this.recordShelf.getLabelOfSlot(j)==null){
+					temp=this.recordShelf.getLabelOfSlot(j);
+					this.recordShelf.setLabelOfSlot(this.recordShelf.getLabelOfSlot(j+1), j);
+					this.recordShelf.setLabelOfSlot(temp, j+1);
+				}
+				else if(this.recordShelf.getLabelOfSlot(j).getRecordPerformer().getName().compareTo(this.recordShelf.getLabelOfSlot(j+1).getRecordPerformer().getName())>0)
+				{
+					temp=this.recordShelf.getLabelOfSlot(j);
+					this.recordShelf.setLabelOfSlot(this.recordShelf.getLabelOfSlot(j+1), j);
+					this.recordShelf.setLabelOfSlot(temp, j+1);
+				
+				}
+				else if(this.recordShelf.getLabelOfSlot(j).getRecordPerformer().getName().compareTo(this.recordShelf.getLabelOfSlot(j+1).getRecordPerformer().getName())==0)
+				{
+					if(this.recordShelf.getLabelOfSlot(j).getEditionYear()>this.recordShelf.getLabelOfSlot(j+1).getEditionYear()){
+						temp=this.recordShelf.getLabelOfSlot(j);
+						this.recordShelf.setLabelOfSlot(this.recordShelf.getLabelOfSlot(j+1), j);
+						this.recordShelf.setLabelOfSlot(temp, j+1);
+					}
+				}
+			}
 		}
 	}
-	*/
+	
+	//Sorts the records of the shelf according to the labels
+	public void sortRecordByLabel(){
+		int i;
+		
+		for(i=0; i< this.recordShelf.getSize(); i++){
+			if(!this.recordShelf.isEmptySlot(i)){
+				this.stackOne.push(this.recordShelf.getRecordFromSlot(i));
+		
+			}
+		}
+		
+		while(!this.stackOne.isEmpty() && !(this.stackOne.top()==null)){
+			for(i=0; i< this.recordShelf.getSize(); i++){
+				if(this.stackOne.top().equals(this.recordShelf.getLabelOfSlot(i))){
+					this.recordShelf.putRecordOnSlot(this.stackOne.pop(), i);
+					i=-1;
+					break;
+				}
+			}
+			if(i!=1){
+				this.stackTwo.push(this.stackOne.pop());
+			}
+		}
+	}
+	
 	
 	
 	//PART3
@@ -148,6 +194,31 @@ public class Test2 {
 			}
 		}
 	}
+	
+	
+	public void playTrack(String title){
+		removeRecordsFromPlayer();
+		Side target=this.recordCollection.getSideByTrackTitle(title);
+		if(!(target==null)){
+			if (!(findRecord(this.recordCollection.getSideByTrackTitle(title).getRecord())==null)){		
+				this.player.pinAxle();
+				this.player.putRecordInAxle(target);
+				while(!this.player.isAxleEmpty()){
+					this.player.dropRecordFromAxle();
+				}
+				this.player.setTurntableRpm();
+				this.player.unparkStylus();
+				this.player.setStylusPosition(target.getStylusPositionByTrack(title));
+				this.player.dropStylus();
+				this.player.startTurntable();
+				System.out.println("Track "+this.player.getPlayingTrack().getTitle()+" is currently playing! Sweet!");
+			}
+		}
+		else{
+			System.out.println("Some ERROR occurred!!!");
+		}
+	}
+	
 }
 	
 	
