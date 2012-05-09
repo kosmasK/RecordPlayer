@@ -19,7 +19,7 @@ public class RecordShelf implements IRecordShelf {
 	
 	@Override
 	public boolean isEmptySlot(int s) {
-		return (this.slots[s].equals(null));
+		return (this.slots[s]==null);
 	}
 
 	@Override

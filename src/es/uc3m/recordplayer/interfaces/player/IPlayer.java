@@ -9,6 +9,7 @@ import es.uc3m.recordplayer.logic.Song;
 public interface IPlayer {
 	public boolean isAxlePinned();
 	public void pinAxle();
+	public void unpinAxle();
 	public boolean isAxleEmpty();
 	public boolean isAxleFull();
 	public boolean isTurntableStarted();

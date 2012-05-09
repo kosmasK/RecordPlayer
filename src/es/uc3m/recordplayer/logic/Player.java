@@ -27,6 +27,10 @@ public class Player implements IPlayer {
 	public void pinAxle() {
 		this.axle.pinOnTurntable(turntable);
 	}
+	
+	public void unpinAxle() {
+		this.axle.unpinFromTurntable();
+	}
 
 	@Override
 	public boolean isAxleEmpty() {
@@ -81,8 +85,6 @@ public class Player implements IPlayer {
 
 	@Override
 	public IList<Record> removeAllRecordsFromTurntable() {
-		this.stylus.park();
-		this.turntable.stop();
 		return this.turntable.removeRecords();
 	}
 

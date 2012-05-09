@@ -54,10 +54,6 @@ public class Turntable implements ITurntable {
 	@Override
 	public IList<Record> removeRecords() {
 		IList<Record> removedRecords=new SList<Record>();
-		while(!this.axle.isEmpty()){		
-			this.axle.dropRecord();
-		}
-		this.axle.unpinFromTurntable();
 		while(!this.playingRecords.isEmpty()){  
 			removedRecords.addLast(this.playingRecords.pop().getRecord());
 		}		
