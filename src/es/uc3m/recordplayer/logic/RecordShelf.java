@@ -52,5 +52,7 @@ public class RecordShelf implements IRecordShelf {
 		return this.labels[s];
 	}
 
-	
+	public int getSize(){
+		return this.slots.length;
+	}
 }

@@ -12,4 +12,6 @@ public interface IRecordShelf {
 	public void setLabelOfSlot(Record l, int s);
 	
 	public Record getLabelOfSlot(int s);
+	
+	public int getSize();
 }
