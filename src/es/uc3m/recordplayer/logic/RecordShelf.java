@@ -38,7 +38,9 @@ public class RecordShelf implements IRecordShelf {
 			return null;
 		}
 		else{
-			return this.slots[s];
+			Record result=this.slots[s];
+			this.slots[s]=null;
+			return result;
 		}		
 	}
 

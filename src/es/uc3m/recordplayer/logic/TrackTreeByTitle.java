@@ -51,7 +51,7 @@ public class TrackTreeByTitle extends BSTree<String, Song> {
 	}
 	
 	private void tracksByYearsRange(BSTNode<String, Song> node, int lowBound, int upperBound, TrackCollection collection){
-		if (node != null) {
+		
 			int key = node.getElement().getYear();
 			if (lowBound <= key && key <= upperBound)
 				collection.addLast(node.getElement());
@@ -61,7 +61,7 @@ public class TrackTreeByTitle extends BSTree<String, Song> {
 			
 			if (node.hasRightChild())
 				tracksByYearsRange(node.getRightChild(), lowBound, upperBound, collection);
-		}
+		
 	}
 		
 }

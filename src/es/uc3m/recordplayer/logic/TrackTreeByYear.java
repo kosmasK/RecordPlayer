@@ -30,21 +30,19 @@ public class TrackTreeByYear extends BSTree<Integer, Song> {
 	
 	//method that returns if the tree contains a track with a given title
 	public boolean containsTrackByTitle(String title){   // <======== is it correct?
-		return containsTrackByTitle(getRoot(),title);
+		return containsKey(getRoot(),title);
 	}
 	
-	private boolean containsTrackByTitle(BSTNode<Integer, Song> node, String title) {
+	private boolean containsKey(BSTNode<Integer, Song> node, String key) {
 		if (node == null)
 			return false;
-		if (title.compareToIgnoreCase(node.getElement().getTitle())<0)	{	
-			System.out.println("!!!!!"+node.getElement().getTitle()+"\n");
-			return containsTrackByTitle(node.getLeftChild(), title);}
-		if (title.compareToIgnoreCase(node.getElement().getTitle())>0)	{
-			System.out.println("!!!!!"+node.getElement().getTitle()+"\n");
-
-			return containsTrackByTitle(node.getRightChild(), title);}
+		if (key.compareTo(node.getElement().getTitle())<0)		
+			return containsKey(node.getLeftChild(), key);
+		if (key.compareTo(node.getElement().getTitle())>0)	
+			return containsKey(node.getRightChild(), key);
 		return true;
 	}
+
 	
 	//method that returns a track collection containing tracks that recorded between two years
 	public TrackCollection tracksByYearsRange(int lowBound, int upperBound){

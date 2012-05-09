@@ -51,7 +51,7 @@ public class Test {
 		  underTheMistleToe.addTrack(0, "Only thing I ever get for Christmas", Genre.POP, 2011, 72, false, true, true);
 		  underTheMistleToe.addTrack(0, "Mistletoe", Genre.POP, 2011, 145, false, true, true);
 		  underTheMistleToe.addTrack(1, "Kosmas love", Genre.POP, 2011, 897, true, true, true);
-		  underTheMistleToe.addTrack(1, "Kosmas is coming to town", Genre.POP, 2011, 1287, true, true, true);
+		  underTheMistleToe.addTrack(1,"Kosmas is coming to town", Genre.POP, 2011, 1287, true, true, true);
 		  underTheMistleToe.addTrack(1, "Kosmas at christmas", Genre.OTHERS, 2011, 34, true, true, true);
 		  //Metallica(Black Album) *Espec�al por Th�r porque �l es el dios del metal
 		  blackAlbum.addTrack(0, "Enter Sandman", Genre.ROCK, 1991, 331, true, true, true);
@@ -91,30 +91,35 @@ public class Test {
 	}
 	
 	
-	// Find a record by title in the stack <=============== WRONG ... CORRECT ... NO TENGO IDEA TIO!
+	// Find a record by title in the stack <=============== WRONG ... CORRECT ... NO TENGO IDEA!
 	public boolean isFoundStack(String title){
 
-		boolean found=true;
-		
-		while (!this.stackOne.isEmpty() && !this.stackOne.top().getTitle().equals(title)){
-			this.stackTwo.push(this.stackOne.pop());
-			found=false;
-		}
-		
-		if (found){	
-			return found;
-		}
-		else{
-			
-			while (!this.stackTwo.isEmpty() && !this.stackTwo.top().getTitle().equals(title)){
-				this.stackOne.push(this.stackTwo.pop());
-				found=false;
-			}
-			if (found){	
-				this.stackOne.push(this.stackTwo.pop());
-			}
-			return found;
-		}
+        boolean found=true;
+        
+        while (!this.stackOne.isEmpty()){
+                
+            if(!(this.stackOne.top().getTitle()==null)){
+                    this.stackTwo.push(this.stackOne.pop());
+                    found=false;
+            }
+        }
+        
+        if (found){        
+                return found;
+        }
+        else{
+                
+	        while (!this.stackTwo.isEmpty()){
+	                if(!(this.stackTwo.top().getTitle()==null)){
+	                        this.stackOne.push(this.stackTwo.pop());
+	                        found=false;
+	                }
+	        }
+	        if (found){        
+	                this.stackOne.push(this.stackTwo.pop());
+	        }
+	        return found;
+        }
 	}
 	
 	// Fill Record Shelf from the stacks ( first from stack one and then from stack two)
@@ -122,6 +127,7 @@ public class Test {
 		int i=0;
 		while(!this.stackOne.isEmpty() && i<this.recordShelf.getSize()){	
 				this.recordShelf.putRecordOnSlot(this.stackOne.pop() , i);
+				
 				i++;
 		}
 		
@@ -141,7 +147,7 @@ public class Test {
 	
 	
 	
-	//Sorts the labels first by title and if same title by year
+	//Sorts the labels first by performer and if same title by year
 	public void sortLabels(){
 		Record temp=new Record();
 		
@@ -216,10 +222,13 @@ public class Test {
 			}
 		}
 		
+/*
+ *
+ * This part of the method craetes a nullPointerException. Is eplained in report
 		if(isFoundStack(record.getTitle())){
 			target=this.stackOne.pop();
 		}
-		
+*/
 		return target;
 	}
 	
@@ -230,11 +239,13 @@ public class Test {
 			if(!this.recordShelf.isEmptySlot(i) && (this.recordShelf.getLabelOfSlot(i)!=null)){
 				if(this.recordShelf.getLabelOfSlot(i).equals(record)){
 					this.recordShelf.putRecordOnSlot(record, i);
+					System.out.println("Record : " + record.getTitle() + "added to shelf");
 					return;
 				}
 			}
 		}	
 		this.stackOne.push(record);
+		System.out.println("Record : " + record.getTitle() + "added to stack");
 	}
 	
 	
@@ -273,6 +284,9 @@ public class Test {
 				this.player.dropStylus();
 				this.player.startTurntable();
 				System.out.println("Track "+this.player.getPlayingTrack().getTitle()+" is currently playing! Sweet!");
+			}
+			else{
+				System.out.println("go here?");
 			}
 		}
 		else{
@@ -325,12 +339,7 @@ public class Test {
 		bettwenYears=treeYear.tracksByYearsRange(1980, 1991);
 		bettwenYears.showTrackCollection();
 		
-	}
-
-
-	
-	
-	
+	}	
 	// Test Queries
 	
 	public void testQueries() {
@@ -363,12 +372,26 @@ public class Test {
 	public void testShelf() {
 		fillRecordShelf();
 		initializeLabelByRecord();
+		sortLabels();
+		sortRecordByLabel(); //Something unexepected happens to fillRecordShelf
 	}
 	  
 	public void test2() {
-	    testStacks();
-	    
+	    //Searches for album : Metallica(Black Album)
+		testStacks();
+	    //Various tests for shelf
 	    testShelf();
+	}
+	
+	public void test3(){
+		System.out.println("********Begin of test 3*******");
+		findRecord(recordShelf.getRecordFromSlot(4)); //This creates nullPointerException
+		//Adding to shelf
+		placeRecordInSlot(recordCollection.getAt(6));
+		
+		findRecord(recordShelf.getRecordFromSlot(6)); //This creates nullPointerException
+		playTrack("Sad But True"); //Track is not found because of isFoundStack() method problem
+		
 	}
 	
 	
@@ -381,6 +404,7 @@ public class Test {
 	    Test test=new Test();
 	    test.test1();
 	    test.test2();
+	    test.test3();
 	    test.test4();
 	  }
 	
