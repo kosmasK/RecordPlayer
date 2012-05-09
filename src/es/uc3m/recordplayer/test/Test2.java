@@ -9,7 +9,7 @@ public class Test2 {
 	
 	RecordCollection recordCollection;
 	
-	
+	//This si a test
 	
 	
 	IRecordStack stackOne=new RecordStack();
